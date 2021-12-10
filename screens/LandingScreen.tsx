@@ -24,7 +24,7 @@ const LandingScreen = () => {
               <p>
                 Don't have an account?
                 <Link href="/accounts/signup">
-                  <a className="font-semibold">Signup</a>
+                  <a className="font-semibold"> Signup</a>
                 </Link>
               </p>
             </div>

@@ -1,8 +1,21 @@
-import React from "react";
+import React, { useState } from "react";
+import * as Yup from "yup";
+
 import Card from "@/components/Card";
 import Button from "@/components/Button";
+import AppForm from "./Form/AppForm";
+import AppInput from "./Form/AppInput";
+
+const validationSchema = Yup.object().shape({
+  email: Yup.string().email().required("Email is required"),
+  password: Yup.string().min(6).max(30).required("Password is required"),
+});
 
 const LoginForm = () => {
+  const handleSubmit = (values) => {
+    console.log(values);
+  };
+
   return (
     <Card>
       <img
@@ -10,20 +23,18 @@ const LoginForm = () => {
         alt="Instagram"
         className="w-6/12 mx-auto mb-3"
       />
-      <form>
+      <AppForm
+        initialValues={{ email: "", password: "" }}
+        onSubmit={handleSubmit}
+        validationSchema={validationSchema}
+        debug={false}
+      >
         <div className="flex flex-col space-y-2">
-          <input
-            placeholder="Email address"
-            className="w-full h-2 px-4 py-5 text-sm border rounded text-gray-base border-gray-primary focus:outline-none"
-          />
-          <input
-            placeholder="Password"
-            type="password"
-            className="w-full h-2 px-4 py-5 text-sm border rounded text-gray-base border-gray-primary focus:outline-none"
-          />
+          <AppInput name="email" placeholder="Email address" />
+          <AppInput name="password" type="password" placeholder="Password" />
           <Button>Login</Button>
         </div>
-      </form>
+      </AppForm>
     </Card>
   );
 };
