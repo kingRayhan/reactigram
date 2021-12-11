@@ -5,6 +5,7 @@ import Card from "@/components/Card";
 import Button from "@/components/Button";
 import AppForm from "./Form/AppForm";
 import AppInput from "./Form/AppInput";
+import useAuth from "@/hooks/useAuth";
 
 const validationSchema = Yup.object().shape({
   email: Yup.string().email().required("Email is required"),
@@ -12,6 +13,8 @@ const validationSchema = Yup.object().shape({
 });
 
 const LoginForm = () => {
+  const { user, loginWithGoogle } = useAuth();
+
   const handleSubmit = (values) => {
     console.log(values);
   };
@@ -23,6 +26,8 @@ const LoginForm = () => {
         alt="Instagram"
         className="w-6/12 mx-auto mb-3"
       />
+
+      <pre>{JSON.stringify(user, null, 2)}</pre>
       <AppForm
         initialValues={{ email: "", password: "" }}
         onSubmit={handleSubmit}
@@ -35,6 +40,9 @@ const LoginForm = () => {
           <Button>Login</Button>
         </div>
       </AppForm>
+      <div className="mt-6">
+        <Button onClick={loginWithGoogle}>Login with Google</Button>
+      </div>
     </Card>
   );
 };
