@@ -1,11 +1,18 @@
 import { Fragment } from "react";
 import Link from "next/link";
+import { useRouter } from "next/router";
+
 import { Menu, Transition } from "@headlessui/react";
 import classNames from "classnames";
 import useAuth from "@/hooks/useAuth";
 
 const AppNavbar = () => {
   const { logout, user } = useAuth();
+  const router = useRouter();
+
+  const goToProfile = () => {
+    router.push(`/${user.username}`);
+  };
 
   return (
     <nav className="sticky top-0 left-0 w-full bg-white border-b border-gray-primary">
@@ -161,14 +168,13 @@ const AppNavbar = () => {
               </svg>
             </button>
             {/* Profile dropdown */}
-
             <div className="relative flex-shrink-0 ml-4">
               <Menu as="div" className="relative inline-block text-left">
                 <div>
                   <Menu.Button className="flex transition duration-150 ease-in-out border-gray-700 rounded-full">
                     <img
                       className="w-8 h-8 rounded-full"
-                      src={user?.photoURL}
+                      src={user?.avatar}
                       alt="user"
                     />
                   </Menu.Button>
@@ -183,7 +189,7 @@ const AppNavbar = () => {
                   leaveTo="transform opacity-0 scale-95"
                 >
                   <Menu.Items className="absolute right-0 w-56 mt-2 bg-white border rounded-md border-gray-primary focus:outline-none">
-                    <Menu.Item>
+                    <Menu.Item onClick={goToProfile}>
                       {({ active }) => (
                         <div
                           className={classNames(
@@ -222,6 +228,7 @@ const AppNavbar = () => {
                 </Transition>
               </Menu>
             </div>
+            {/*  */}
           </div>
         </div>
       </div>
