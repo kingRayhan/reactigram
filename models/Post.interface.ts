@@ -1,3 +1,4 @@
+import ServerTimestamp from "./ServerTimestamp.interface";
 import User from "./User.interface";
 
 export default interface Post {
@@ -5,6 +6,6 @@ export default interface Post {
   caption: string;
   userId: string;
   imageUrl: string;
-  createdAt: string;
+  createdAt: ServerTimestamp;
   user?: User;
 }

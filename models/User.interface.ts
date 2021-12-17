@@ -1,3 +1,5 @@
+import ServerTimestamp from "./ServerTimestamp.interface";
+
 export default interface User {
   uid?: string;
   username: string;
@@ -7,5 +9,5 @@ export default interface User {
   avatar: string;
   following: string[];
   followers: string[];
-  joined?: any;
+  joined?: ServerTimestamp;
 }

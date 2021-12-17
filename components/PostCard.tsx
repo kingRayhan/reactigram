@@ -1,7 +1,19 @@
 import Post from "@/models/Post.interface";
+import ServerTimestamp from "@/models/ServerTimestamp.interface";
+import dayjs from "dayjs";
+import relativeTime from "dayjs/plugin/relativeTime";
+import Link from "next/link";
 import React from "react";
 
+dayjs.extend(relativeTime);
+
 const PostCard = ({ post }: { post: Post }) => {
+  const formatTime = (time: ServerTimestamp): string => {
+    const date = dayjs.unix(time.seconds);
+    return date.fromNow();
+    // return date.format("MMM DD, YYYY");
+  };
+
   return (
     <div className="mb-10 bg-white border rounded feed-item border-gray-primary">
       <div className="flex items-center justify-between px-4 py-2 border-b header">
@@ -118,12 +130,16 @@ const PostCard = ({ post }: { post: Post }) => {
           <div className="mt-1 likes">
             <span className="text-sm font-bold">122,780 likes</span>
           </div>
-          <div className="mt-3 text-sm caption">
-            <b>apple </b>
-            new Iphone release ✨
+          <div className="mt-3 space-x-1 text-sm caption">
+            <Link href={`/${post.user.username}`}>
+              <a className="mr-1 font-semibold">{post.user.username}</a>
+            </Link>
+            <span className="text-gray-700">{post.caption}</span>
           </div>
           <div className="mt-1 post-date">
-            <span className="text-xs text-gray-900">1 minute ago</span>
+            <span className="text-xs text-gray-900">
+              {formatTime(post.createdAt)}
+            </span>
           </div>
         </div>
         <div className="pt-3 mt-3 border-t bottom">
