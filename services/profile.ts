@@ -9,18 +9,7 @@ import {
   where,
 } from "firebase/firestore";
 import { db } from "@/services/firebase";
-
-export interface User {
-  uid?: string;
-  username: string;
-  displayName?: string;
-  bio?: string;
-  email: string;
-  avatar: string;
-  following: string[];
-  followers: string[];
-  joined?: any;
-}
+import User from "@/models/User.interface";
 
 export const firebaseUserToUser = (firebaseUser): User => {
   return {

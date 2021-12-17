@@ -1,6 +1,7 @@
+import Post from "@/models/Post.interface";
 import React from "react";
 
-const Post = () => {
+const PostCard = ({ post }: { post: Post }) => {
   return (
     <div className="mb-10 bg-white border rounded feed-item border-gray-primary">
       <div className="flex items-center justify-between px-4 py-2 border-b header">
@@ -11,11 +12,11 @@ const Post = () => {
               className="_6q-tv"
               data-testid="user-avatar"
               draggable="false"
-              src="https://uifaces.co/our-content/donated/3799Ffxy.jpeg"
+              src={post.user.avatar}
             />
           </div>
           <div className="flex flex-col user-name-and-place">
-            <span className="text-sm font-bold">apple</span>
+            <span className="text-sm font-bold">{post.user.username}</span>
           </div>
         </div>
         <div className="right">
@@ -52,10 +53,7 @@ const Post = () => {
         </div>
       </div>
       <div className="feed-img">
-        <img
-          src="https://images.unsplash.com/photo-1512054502232-10a0a035d672?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=80"
-          alt=""
-        />
+        <img src={post.imageUrl} alt={post.caption} />
       </div>
       <div className="p-4 card-footer">
         <div className="top">
@@ -132,7 +130,7 @@ const Post = () => {
           <div className="flex wrapper">
             <input
               type="text"
-              className="w-10/12 w-full h-10 text-sm outline-none focus:outline-none"
+              className="w-10/12 h-10 text-sm outline-none focus:outline-none"
               placeholder="Add a comment"
             />
             <button className="w-2/12 font-bold text-right text-blue-500 opacity-75">
@@ -145,4 +143,4 @@ const Post = () => {
   );
 };
 
-export default Post;
+export default PostCard;

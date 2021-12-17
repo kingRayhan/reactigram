@@ -1,9 +1,9 @@
+import User from "@/models/User.interface";
 import { auth } from "@/services/firebase";
 import {
   firebaseUserToUser,
   getUserByUid,
   storeUser,
-  User,
 } from "@/services/profile";
 import {
   GoogleAuthProvider,
